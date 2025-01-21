@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Base Tailwind CSS utilities are used for overall styling */
+/* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e293b, #2d3748, #1a202c);
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Google-Like Search Bar */
+  #location-input {
+    background-color: rgb(51, 49, 49);
+    color: #ffffff;
+    font-size: 1.1rem;
+    box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
+  }
+  #location-input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Adjust transparency as needed */
+     /* Optional: Adds a subtle effect */
+}
+
+  #location-input:focus {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  
+  #search-btn {
+    font-size: 1.1rem;
+  }
+  
+  /* Weather Info Section */
+  #weather-info {
+    background: linear-gradient(135deg, #0606062d, #ffffff);
+    color: rgb(255, 255, 255);
+    font-size: 1.2rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+  }
+  
+  /* Transparent Forecast Cards */
+  #forecast {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .forecast-card {
+    background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+    color: #000; /* Black text for readability */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    backdrop-filter: blur(10px); /* Glassmorphic blurry effect */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    text-align: center;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  .forecast-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  .forecast-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .forecast-card .temp {
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+  
+  .forecast-card .condition {
+    font-size: 1rem;
+    color: #d1d5db74;
+  }
+  

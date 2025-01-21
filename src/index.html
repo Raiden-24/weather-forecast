@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <script src="script.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body class="bg-gradient-to-r from-blue-400 to-purple-500 text-white min-h-screen flex flex-col items-center justify-center">
+  <div id="app" class="text-center">
+    <h1 class="text-4xl font-bold mb-4 animate__animated animate__fadeInDown">Weather App</h1>
+    <!-- Search bar -->
+    <div class="flex items-center justify-center mb-6">
+      <input
+        id="location-input"
+        type="text"
+        placeholder="Enter a location"
+        class="p-3 rounded-l-full text-black w-80 outline-none focus:ring-2 focus:ring-green-400"
+      />
+      <button
+        id="search-btn"
+        class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-r-full transition-transform transform hover:scale-105"
+      >
+        Search
+      </button>
+    </div>
+    <!-- Display current weather -->
+    <p id="time-date" class="text-xl mb-4"></p>
+    <div id="weather-info" class="p-6 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg"></div>
+    <!-- 7-Day Forecast -->
+    <div id="forecast" class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </div>
+</body>
+</html>
