@@ -70,9 +70,12 @@ button:focus {
 
 /* ==================== WEATHER INFO SECTION ==================== */
 #weather-info {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--card-border);
+  /* Translucent glassmorphism effect - background shows through */
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(168, 85, 247, 0.3));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   transition: all var(--transition-speed) ease;
   animation: fadeIn 0.5s ease;
 }
