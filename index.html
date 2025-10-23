@@ -3,36 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weather App</title>
-  <script src="script.js" defer></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="A modern weather forecast application with real-time updates, 7-day forecasts, and beautiful UI" />
+  <meta name="keywords" content="weather, forecast, weather app, temperature, climate" />
+  <meta name="author" content="Your Name" />
+  
+  <title>Weather Forecast - Real-time Weather Updates</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>" />
+  
+  <!-- Stylesheets -->
   <link href="styles.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Main Script -->
+  <script src="app.js" defer></script>
 </head>
-<body class="bg-gradient-to-r from-blue-400 to-purple-500 text-white min-h-screen flex flex-col items-center justify-center">
-  <div id="app" class="text-center">
-    <h1 class="text-4xl font-bold mb-4 animate__animated animate__fadeInDown">Weather App</h1>
-    <!-- Search bar -->
-    <div class="flex items-center justify-center mb-6">
-      <input
-        id="location-input"
-        type="text"
-        placeholder="Enter a location"
-        class="p-3 rounded-l-full text-black w-80 outline-none focus:ring-2 focus:ring-green-400"
-      />
-      <button
-        id="search-btn"
-        class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-r-full transition-transform transform hover:scale-105"
-      >
-        Search
-      </button>
+
+<body class="bg-gradient-to-r from-blue-400 to-purple-500 text-white min-h-screen">
+  
+  <!-- Main Container -->
+  <div id="app" class="container mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <h1 class="text-5xl font-bold mb-2 animate__animated animate__fadeInDown">
+        🌤️ Weather Forecast
+      </h1>
+      <p class="text-lg opacity-90">Real-time weather updates for any location worldwide</p>
+    </header>
+
+    <!-- Controls Section -->
+    <div class="max-w-4xl mx-auto mb-8">
+      
+      <!-- Search Bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+        <div class="flex items-center w-full sm:w-auto">
+          <input
+            id="location-input"
+            type="text"
+            placeholder="Enter city name or coordinates..."
+            class="p-3 rounded-l-full text-black w-full sm:w-96 outline-none focus:ring-2 focus:ring-green-400 transition"
+            aria-label="Location search input"
+          />
+          <button
+            id="search-btn"
+            class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-r-full transition-all transform hover:scale-105 active:scale-95"
+            aria-label="Search weather"
+          >
+            🔍 Search
+          </button>
+        </div>
+        
+        <!-- Additional Controls -->
+        <div class="flex gap-2">
+          <button
+            onclick="getCurrentLocation()"
+            class="bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded-full transition-all transform hover:scale-105 active:scale-95"
+            title="Use my current location"
+            aria-label="Get current location weather"
+          >
+            📍 My Location
+          </button>
+          
+          <button
+            id="unit-toggle"
+            onclick="toggleUnit()"
+            class="bg-purple-600 hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-full transition-all transform hover:scale-105 active:scale-95"
+            title="Toggle temperature unit"
+            aria-label="Toggle between Celsius and Fahrenheit"
+          >
+            °F
+          </button>
+          
+          <button
+            id="speak-btn"
+            onclick="speakCurrentWeather()"
+            class="bg-orange-600 hover:bg-orange-800 text-white font-bold py-3 px-6 rounded-full transition-all transform hover:scale-105 active:scale-95"
+            title="Hear weather forecast"
+            aria-label="Speak weather forecast"
+          >
+            🔊
+          </button>
+        </div>
+      </div>
+
+      <!-- Time and Date -->
+      <div class="text-center mb-6">
+        <p id="time-date" class="text-xl font-semibold opacity-90"></p>
+      </div>
     </div>
-    <!-- Display current weather -->
-    <p id="time-date" class="text-xl mb-4"></p>
-    <div id="weather-info" class="p-6 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg shadow-lg"></div>
-    <!-- 7-Day Forecast -->
-    <div id="forecast" class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+    <!-- Weather Information Section -->
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Current Weather -->
+      <div 
+        id="weather-info" 
+        class="p-8 bg-gradient-to-br from-blue-500/80 to-purple-500/80 text-white rounded-2xl shadow-2xl backdrop-blur-lg mb-8 min-h-[400px] flex items-center justify-center"
+        role="region"
+        aria-label="Current weather information"
+      >
+        <div class="text-center">
+          <p class="text-xl">Enter a location to see weather information</p>
+          <p class="mt-4 opacity-80">Or click "My Location" to use your current position</p>
+        </div>
+      </div>
+
+      <!-- 3-Day Forecast -->
+      <div 
+        id="forecast" 
+        class="mt-8"
+        role="region"
+        aria-label="3-day weather forecast"
+      ></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-12 pb-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-md rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-4">About This Project</h3>
+          <p class="mb-4 opacity-90">
+            A modern, responsive weather forecast application built with vanilla JavaScript, 
+            TailwindCSS, and the WeatherAPI. Features include real-time weather updates, 
+            3-day forecasts, geolocation support, and text-to-speech capabilities.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <span class="bg-white/20 px-4 py-2 rounded-full">JavaScript ES6+</span>
+            <span class="bg-white/20 px-4 py-2 rounded-full">TailwindCSS</span>
+            <span class="bg-white/20 px-4 py-2 rounded-full">WeatherAPI</span>
+            <span class="bg-white/20 px-4 py-2 rounded-full">Geolocation API</span>
+            <span class="bg-white/20 px-4 py-2 rounded-full">Web Speech API</span>
+            <span class="bg-white/20 px-4 py-2 rounded-full">LocalStorage</span>
+          </div>
+          <div class="mt-6 text-sm opacity-75">
+            <p>Data provided by <a href="https://www.weatherapi.com/" target="_blank" rel="noopener" class="underline hover:text-blue-200">WeatherAPI.com</a></p>
+            <p class="mt-2">© 2025 Weather Forecast App. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
+
+  <!-- Accessibility: Skip to main content -->
+  <a href="#weather-info" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-black px-4 py-2 rounded">
+    Skip to weather information
+  </a>
+
 </body>
 </html>

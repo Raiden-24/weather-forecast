@@ -1,21 +1,53 @@
 {
-  "name": "weather-final",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "weather-forecast-app",
+  "version": "2.0.0",
+  "description": "A modern weather forecast application with real-time updates, 7-day forecasts, geolocation support, and text-to-speech capabilities",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx http-server -p 8000 -o",
+    "dev": "npx live-server --port=8000 --open=index-improved.html",
+    "build": "npx tailwindcss -i ./styles-improved.css -o ./dist/output.css --minify",
+    "watch": "npx tailwindcss -i ./styles-improved.css -o ./dist/output.css --watch",
+    "test": "echo \"Tests coming soon\" && exit 0",
+    "lint": "npx eslint app.js",
+    "format": "npx prettier --write \"**/*.{js,html,css,md}\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "description": "",
+  "keywords": [
+    "weather",
+    "forecast",
+    "weather-app",
+    "javascript",
+    "tailwindcss",
+    "geolocation",
+    "text-to-speech",
+    "responsive",
+    "pwa"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/weather-forecast.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/weather-forecast/issues"
+  },
+  "homepage": "https://github.com/yourusername/weather-forecast#readme",
+  "type": "module",
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
   },
   "dependencies": {
     "dotenv": "^16.4.7"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
   }
 }

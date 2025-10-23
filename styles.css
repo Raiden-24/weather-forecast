@@ -1,78 +1,346 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Base Tailwind CSS utilities are used for overall styling */
-/* Base Styles */
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1e293b, #2d3748, #1a202c);
-    color: white;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Google-Like Search Bar */
-  #location-input {
-    background-color: rgb(51, 49, 49);
-    color: #ffffff;
-    font-size: 1.1rem;
-    box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.1);
-  }
-  #location-input::placeholder {
-    color: rgba(255, 255, 255, 0.7); /* Adjust transparency as needed */
-     /* Optional: Adds a subtle effect */
+
+/* ==================== CUSTOM PROPERTIES ==================== */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --transition-speed: 0.3s;
 }
 
-  #location-input:focus {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+/* ==================== BASE STYLES ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1e293b, #2d3748, #1a202c);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background var(--transition-speed) ease;
+}
+
+/* ==================== SEARCH INPUT ==================== */
+#location-input {
+  background-color: rgba(51, 49, 49, 0.9);
+  color: #ffffff;
+  font-size: 1.1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-speed) ease;
+  border: 2px solid transparent;
+}
+
+#location-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#location-input:focus {
+  box-shadow: 0 0 20px rgba(99, 179, 237, 0.6);
+  border-color: rgba(99, 179, 237, 0.8);
+  background-color: rgba(51, 49, 49, 1);
+}
+
+/* ==================== BUTTONS ==================== */
+button {
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* ==================== WEATHER INFO SECTION ==================== */
+#weather-info {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  transition: all var(--transition-speed) ease;
+  animation: fadeIn 0.5s ease;
+}
+
+#weather-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Weather Icons */
+.wi {
+  display: inline-block;
+  font-size: 4rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== FORECAST CARDS ==================== */
+#forecast {
+  animation: fadeInUp 0.6s ease;
+}
+
+.forecast-card {
+  background: var(--card-bg);
+  color: #fff;
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all var(--transition-speed) ease;
+  animation: fadeInUp 0.5s ease;
+  animation-fill-mode: both;
+}
+
+.forecast-card:nth-child(1) { animation-delay: 0.1s; }
+.forecast-card:nth-child(2) { animation-delay: 0.2s; }
+.forecast-card:nth-child(3) { animation-delay: 0.3s; }
+.forecast-card:nth-child(4) { animation-delay: 0.4s; }
+.forecast-card:nth-child(5) { animation-delay: 0.5s; }
+.forecast-card:nth-child(6) { animation-delay: 0.6s; }
+.forecast-card:nth-child(7) { animation-delay: 0.7s; }
+
+.forecast-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.forecast-card img {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform var(--transition-speed) ease;
+}
+
+.forecast-card:hover img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* ==================== LOADING SPINNER ==================== */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  
-  #search-btn {
-    font-size: 1.1rem;
+  to {
+    transform: rotate(360deg);
   }
-  
-  /* Weather Info Section */
-  #weather-info {
-    background: linear-gradient(135deg, #0606062d, #ffffff);
-    color: rgb(255, 255, 255);
-    font-size: 1.2rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* Transparent Forecast Cards */
-  #forecast {
-    display: grid;
-    gap: 20px;
+  to {
+    opacity: 1;
   }
-  
-  .forecast-card {
-    background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
-    color: #000; /* Black text for readability */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
-    backdrop-filter: blur(10px); /* Glassmorphic blurry effect */
-    border-radius: 15px; /* Rounded corners */
-    padding: 20px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    text-align: center;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  .forecast-card:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    transform: translateY(-5px);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .forecast-card h3 {
-    font-size: 1.5rem;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
   }
-  
-  .forecast-card .temp {
-    font-size: 2rem;
-    margin-top: 10px;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .forecast-card .condition {
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  #location-input {
     font-size: 1rem;
-    color: #d1d5db74;
+    width: 100%;
   }
-  
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .wi {
+    font-size: 3rem;
+  }
+
+  .forecast-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  #weather-info {
+    padding: 1.5rem !important;
+  }
+
+  .forecast-card {
+    padding: 0.75rem;
+  }
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ==================== SCROLLBAR STYLING ==================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  button,
+  #search-btn,
+  #unit-toggle,
+  #speak-btn {
+    display: none;
+  }
+
+  #weather-info,
+  .forecast-card {
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+  }
+}
+
+/* ==================== DARK MODE SUPPORT ==================== */
+@media (prefers-color-scheme: dark) {
+  /* Already dark by default */
+}
+
+/* ==================== REDUCED MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==================== HIGH CONTRAST MODE ==================== */
+@media (prefers-contrast: high) {
+  button {
+    border: 2px solid white;
+  }
+
+  #location-input {
+    border: 2px solid white;
+  }
+
+  .forecast-card {
+    border: 2px solid white;
+  }
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hover-lift {
+  transition: transform var(--transition-speed) ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* ==================== CUSTOM ANIMATIONS ==================== */
+.pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
